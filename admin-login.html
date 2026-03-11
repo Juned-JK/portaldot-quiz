@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — Portaldot Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="login-body">
+
+  <div class="login-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <div class="login-wrap">
+    <div class="login-card">
+
+      <div class="login-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+          <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+        </a>
+      </div>
+
+      <div class="login-header">
+        <div class="login-icon">🔐</div>
+        <h1>Admin Panel</h1>
+        <p>Sign in to manage quizzes and content.</p>
+      </div>
+
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <div class="form-group">
+          <label for="loginUser">Username</label>
+          <input type="text" id="loginUser" placeholder="admin" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="loginPass" placeholder="••••••••••••" autocomplete="current-password" />
+            <button type="button" class="pass-toggle" id="passToggle" aria-label="Show password">👁</button>
+          </div>
+        </div>
+        <span class="form-error" id="loginError"></span>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign In →</button>
+      </form>
+
+      <a href="index.html" class="login-back">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'portaldot@2026';
+
+    // Already logged in? Go to dashboard
+    if (sessionStorage.getItem('pdq_admin_auth')) {
+      window.location.replace('admin-dashboard.html');
+    }
+
+    const form       = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const passToggle = document.getElementById('passToggle');
+    const passInput  = document.getElementById('loginPass');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = passInput.value;
+
+      if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        sessionStorage.setItem('pdq_admin_auth', '1');
+        sessionStorage.setItem('pdq_admin_user', user);
+        window.location.replace('admin-dashboard.html');
+      } else {
+        loginError.textContent = 'Invalid username or password.';
+        setTimeout(() => loginError.textContent = '', 3500);
+        passInput.value = '';
+        passInput.focus();
+      }
+    });
+
+    passToggle.addEventListener('click', function () {
+      const isPass = passInput.type === 'password';
+      passInput.type = isPass ? 'text' : 'password';
+      passToggle.textContent = isPass ? '🙈' : '👁';
+    });
+  </script>
+</body>
+</html>

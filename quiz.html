@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz — Portaldot Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+        <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link active">Quiz</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="quiz.html" class="mobile-link active">Quiz</a>
+      <a href="leaderboard.html" class="mobile-link">Leaderboard</a>
+      <a href="about.html" class="mobile-link">About</a>
+    </div>
+  </nav>
+
+  <!-- QUIZ CONTAINER -->
+  <div class="quiz-page">
+    <div class="quiz-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    <!-- ══ LOADING ══ -->
+    <div class="quiz-screen" id="s-loading">
+      <div class="loading-center">
+        <div class="loading-spinner-lg"></div>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <!-- ══ LIST: quiz selection ══ -->
+    <div class="quiz-screen hidden" id="s-list">
+      <div class="ql-wrap">
+        <div class="ql-header">
+          <div class="section-label">Available Quizzes</div>
+          <h2 class="section-title">Join a <span class="gradient-text">Quiz</span></h2>
+        </div>
+        <div id="quizListContainer" class="quiz-cards-grid"></div>
+      </div>
+    </div>
+
+    <!-- ══ WAIT: countdown (scheduled) ══ -->
+    <div class="quiz-screen hidden" id="s-wait">
+      <div class="quiz-card wait-card">
+        <div class="wc-badge">Upcoming Quiz</div>
+        <h2 class="wc-title" id="wcTitle"></h2>
+        <p class="wc-desc" id="wcDesc"></p>
+        <div class="wc-tags" id="wcTags"></div>
+        <div class="wc-reward hidden" id="wcReward"></div>
+        <div class="countdown-wrap">
+          <p class="cd-label">Quiz starts in</p>
+          <div class="countdown-display" id="countdownDisplay">
+            <div class="cd-block"><span class="cd-num" id="cdDays">00</span><span class="cd-unit">Days</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-block"><span class="cd-num" id="cdHours">00</span><span class="cd-unit">Hrs</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-block"><span class="cd-num" id="cdMins">00</span><span class="cd-unit">Min</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-block"><span class="cd-num" id="cdSecs">00</span><span class="cd-unit">Sec</span></div>
+          </div>
+        </div>
+        <div class="wc-times">
+          <span>🕐 Start: <strong id="wcStart"></strong></span>
+          <span>🕐 End: <strong id="wcEnd"></strong></span>
+        </div>
+        <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+      </div>
+    </div>
+
+    <!-- ══ JOIN: username entry (live) ══ -->
+    <div class="quiz-screen hidden" id="s-join">
+      <div class="quiz-card join-card">
+        <div class="jc-live-badge">🟢 Live Now</div>
+        <h2 class="jc-title" id="jcTitle"></h2>
+        <p class="jc-desc" id="jcDesc"></p>
+        <div class="jc-meta">
+          <span id="jcQCount"></span>
+          <span>·</span>
+          <span>30 sec per question</span>
+        </div>
+        <div class="jc-reward hidden" id="jcReward"></div>
+        <div class="jc-form">
+          <label for="usernameInput">Your Username</label>
+          <input type="text" id="usernameInput" placeholder="e.g. satoshi_42" maxlength="24" autocomplete="off" spellcheck="false" />
+          <span class="input-hint">3–24 characters · letters, numbers, _ - . only</span>
+          <span class="input-error" id="usernameError"></span>
+        </div>
+        <button class="btn btn-primary btn-full" id="startQuizBtn">Join Quiz →</button>
+      </div>
+    </div>
+
+    <!-- ══ ACTIVE: quiz in progress ══ -->
+    <div class="quiz-screen hidden" id="s-active">
+      <div class="quiz-header-bar">
+        <div class="qhb-left"><span class="qhb-user" id="displayUsername"></span></div>
+        <div class="qhb-center">
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+          <span class="progress-text" id="progressText">1 / 10</span>
+        </div>
+        <div class="qhb-right">
+          <div class="timer-ring-wrap" id="timerDisplay">
+            <svg class="timer-ring" viewBox="0 0 44 44" aria-hidden="true">
+              <circle class="timer-ring-bg"   cx="22" cy="22" r="18"/>
+              <circle class="timer-ring-fill" cx="22" cy="22" r="18" id="timerRingFill"/>
+            </svg>
+            <div class="timer-ring-inner">
+              <span class="timer-ring-num" id="timerNum">30</span>
+              <span class="timer-ring-unit">s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quiz-main">
+        <div class="question-card">
+          <div class="question-meta">
+            <span class="q-number" id="questionNumber">Question 1</span>
+            <span class="q-category" id="questionCategory">General</span>
+          </div>
+          <h2 class="question-text" id="questionText"></h2>
+          <div class="options-grid" id="optionsGrid"></div>
+          <div class="quiz-nav">
+            <div class="quiz-score-live">Score: <strong id="liveScore">0</strong></div>
+            <button class="btn btn-primary" id="nextBtn" disabled>Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ RESULT: personal result ══ -->
+    <div class="quiz-screen hidden" id="s-result">
+      <div class="quiz-card results-card">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <h2 class="results-title">Quiz Complete!</h2>
+        <div class="results-username">Played as: <strong id="resultsUsername"></strong></div>
+        <div class="results-score-ring">
+          <svg viewBox="0 0 120 120" class="score-ring-svg">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill" id="ringFill"/>
+          </svg>
+          <div class="score-ring-text">
+            <span class="score-big" id="scoreDisplay">0</span>
+            <span class="score-denom" id="scoreDenom">/ 10</span>
+          </div>
+        </div>
+        <div class="score-label" id="scoreLabel"></div>
+        <div class="results-reward hidden" id="resultsReward"></div>
+        <div class="results-breakdown">
+          <div class="rb-item correct"><span class="rb-icon">✓</span><span class="rb-val" id="correctCount">0</span><span class="rb-lbl">Correct</span></div>
+          <div class="rb-item wrong"><span class="rb-icon">✗</span><span class="rb-val" id="wrongCount">0</span><span class="rb-lbl">Wrong</span></div>
+          <div class="rb-item skipped"><span class="rb-icon">–</span><span class="rb-val" id="skippedCount">0</span><span class="rb-lbl">Skipped</span></div>
+        </div>
+        <div class="results-actions">
+          <button class="btn btn-primary" id="viewLeaderboardBtn">View Leaderboard →</button>
+          <a href="index.html" class="btn btn-ghost">Back to Home</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ENDED: quiz has ended ══ -->
+    <div class="quiz-screen hidden" id="s-ended">
+      <div class="quiz-card ended-card">
+        <div class="ec-icon">🏁</div>
+        <h2>Quiz Has Ended</h2>
+        <p class="ec-desc" id="ecTitle"></p>
+        <p class="ec-sub">This quiz is no longer accepting submissions.</p>
+        <div class="ec-actions">
+          <button class="btn btn-primary" id="seeLeaderboardBtn">See Leaderboard →</button>
+          <a href="index.html" class="btn btn-ghost">Back to Home</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NOT FOUND ══ -->
+    <div class="quiz-screen hidden" id="s-notfound">
+      <div class="quiz-card">
+        <div style="font-size:48px;text-align:center;margin-bottom:16px">🔍</div>
+        <h2 style="text-align:center;margin-bottom:12px">Quiz Not Found</h2>
+        <p style="text-align:center;color:var(--text-3);margin-bottom:28px">This quiz doesn't exist or isn't available yet.</p>
+        <a href="index.html" class="btn btn-primary btn-full">← Back to Home</a>
+      </div>
+    </div>
+
+  </div><!-- /quiz-page -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="db.js"></script>
+  <script src="quiz.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

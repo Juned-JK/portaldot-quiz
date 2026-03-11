@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portaldot Quiz — Community Quiz Platform</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+        <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link active">Home</a>
+      <a href="quiz.html" class="mobile-link">Quiz</a>
+      <a href="leaderboard.html" class="mobile-link">Leaderboard</a>
+      <a href="about.html" class="mobile-link">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="home-hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Community Quiz Platform
+      </div>
+      <h1 class="home-hero-title">
+        Learn &amp; Test Your<br />
+        <span class="gradient-text">Portaldot Knowledge</span>
+      </h1>
+      <p class="home-hero-desc">
+        A free community quiz platform focused on the Portaldot ecosystem. No sign-up needed — just join a quiz and compete.
+      </p>
+      <div class="home-hero-actions">
+        <a href="quiz.html" class="btn btn-primary btn-glow">Join a Quiz →</a>
+        <a href="about.html" class="btn btn-ghost">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="schedule" id="schedule">
+    <div class="section-inner">
+      <div class="section-label">Upcoming &amp; Live</div>
+      <h2 class="section-title">Quiz <span class="gradient-text">Schedule</span></h2>
+      <p class="section-desc">Live and upcoming quizzes with real-time countdowns. Jump in when a quiz goes live.</p>
+      <div class="schedule-grid" id="scheduleGrid">
+        <div class="sched-loading">
+          <div class="loading-spinner" style="width:20px;height:20px;border-width:2px"></div>
+          <span>Loading schedule…</span>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:40px">
+        <a href="quiz.html" class="btn btn-ghost">View All Quizzes →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:12px">
+          <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+          <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+        </a>
+        <p>A community quiz platform for the Portaldot ecosystem.</p>
+        <div class="footer-socials">
+          <a href="https://x.com/PortaldotL0" target="_blank" rel="noopener" class="social-link" title="Follow on X">𝕏</a>
+          <a href="https://discord.gg/portaldot" target="_blank" rel="noopener" class="social-link" title="Discord">💬</a>
+          <a href="https://t.me/portaldot1" target="_blank" rel="noopener" class="social-link" title="Telegram">✈</a>
+          <a href="https://github.com/portaldotVolunteer" target="_blank" rel="noopener" class="social-link" title="GitHub">⌥</a>
+          <a href="https://linktr.ee/Portaldot" target="_blank" rel="noopener" class="social-link" title="Linktree">🌿</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="fl-group">
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+          <a href="quiz.html">Quiz</a>
+          <a href="leaderboard.html">Leaderboard</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="fl-group">
+          <h4>Community</h4>
+          <a href="https://x.com/PortaldotL0" target="_blank" rel="noopener">X / Twitter ↗</a>
+          <a href="https://mee6.xyz/i/J4zcxdKRC8" target="_blank" rel="noopener">Discord ↗</a>
+          <a href="https://t.me/portaldot1" target="_blank" rel="noopener">Telegram ↗</a>
+        </div>
+        <div class="fl-group">
+          <h4>Resources</h4>
+          <a href="https://portaldot-network.gitbook.io/portaldot-network-docs" target="_blank" rel="noopener">Whitepaper ↗</a>
+          <a href="https://github.com/portaldotVolunteer" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://linktr.ee/Portaldot" target="_blank" rel="noopener">Linktree ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Portaldot Quiz. Built by the community.</span>
+      <a href="admin-login.html" class="footer-admin-link">Admin ↗</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="db.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

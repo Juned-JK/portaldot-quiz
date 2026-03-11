@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Portaldot Quiz Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="admin-body">
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- LAYOUT -->
+  <div class="admin-layout" id="adminLayout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sb-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+          <span class="logo-name" style="font-size:14px">Portaldot<span class="logo-accent">Quiz</span></span>
+        </a>
+        <span class="sb-tag">Admin</span>
+      </div>
+
+      <nav class="sb-nav">
+        <button class="sb-nav-item active" data-view="overview">
+          <span class="sni-icon">📊</span> Overview
+        </button>
+        <button class="sb-nav-item" data-view="quizzes">
+          <span class="sni-icon">📋</span> All Quizzes
+        </button>
+        <button class="sb-nav-item" data-view="new-quiz">
+          <span class="sni-icon">➕</span> New Quiz
+        </button>
+        <button class="sb-nav-item" data-view="schedule">
+          <span class="sni-icon">📅</span> Schedule
+        </button>
+      </nav>
+
+      <div class="sb-footer">
+        <div class="sb-user">
+          <span class="sb-user-dot"></span>
+          <span id="adminUsername">Admin</span>
+        </div>
+        <span id="dbStatusBadge" class="db-badge db-local">💾 Local only</span>
+        <button class="btn-logout" id="logoutBtn" title="Logout">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <div class="admin-main">
+
+      <!-- Mobile header -->
+      <header class="admin-mobile-header">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">☰</button>
+        <span class="amh-title">Admin Panel</span>
+        <a href="index.html" class="amh-home">Home ↗</a>
+      </header>
+
+      <!-- Sidebar overlay for mobile -->
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+      <!-- ══════════════════════════════════════
+           PANEL: OVERVIEW
+      ══════════════════════════════════════ -->
+      <section class="admin-panel" id="panelOverview">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">Overview</h2>
+            <p class="panel-subtitle">Welcome back — here's your quiz platform at a glance.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="initQuizForm()">+ New Quiz</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="sc-icon">📋</div>
+            <div class="sc-body">
+              <span class="sc-num" id="statTotalQuizzes">0</span>
+              <span class="sc-lbl">Total Quizzes</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-icon">❓</div>
+            <div class="sc-body">
+              <span class="sc-num" id="statTotalQuestions">0</span>
+              <span class="sc-lbl">Total Questions</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-icon">👥</div>
+            <div class="sc-body">
+              <span class="sc-num" id="statTotalParticipants">—</span>
+              <span class="sc-lbl">Participants</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-icon">📅</div>
+            <div class="sc-body">
+              <span class="sc-num" id="statScheduled">0</span>
+              <span class="sc-lbl">Scheduled</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-icon">🟢</div>
+            <div class="sc-body">
+              <span class="sc-num" id="statLive">0</span>
+              <span class="sc-lbl">Live Now</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="sb-header-row">
+            <h3>Recent Quizzes</h3>
+            <button class="btn-link" data-view="quizzes">View all →</button>
+          </div>
+          <div id="recentQuizzesList" class="quiz-list"></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: ALL QUIZZES
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelQuizzes">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">All Quizzes</h2>
+            <p class="panel-subtitle">Manage, edit and organise all your quizzes.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="initQuizForm()">+ New Quiz</button>
+        </div>
+        <div id="quizzesListContainer" class="quiz-list"></div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: QUIZ FORM (create / edit)
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelQuizForm">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="quizFormTitle">New Quiz</h2>
+            <p class="panel-subtitle">Fill in the details for this quiz.</p>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="cancelQuizForm">← Cancel</button>
+        </div>
+
+        <form class="admin-form" id="quizForm">
+          <input type="hidden" id="qfId" />
+
+          <div class="form-group">
+            <label for="qfTitle">Quiz Title <span class="req">*</span></label>
+            <input type="text" id="qfTitle" placeholder="e.g. DeFi Deep Dive" maxlength="80" required />
+          </div>
+
+          <div class="form-group">
+            <label for="qfDescription">Description</label>
+            <textarea id="qfDescription" rows="3" placeholder="Brief description of this quiz..." maxlength="300"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="qfTags">Tags <span class="form-hint">(comma-separated, e.g. DeFi, AMM, Finance)</span></label>
+            <input type="text" id="qfTags" placeholder="DeFi, Web3, Blockchain" />
+          </div>
+
+          <div class="form-group">
+            <label for="qfReward">
+              🎁 Reward
+              <span class="form-hint">(optional — shown to participants as a prize banner)</span>
+            </label>
+            <input type="text" id="qfReward" placeholder="e.g. 100 USDT · NFT Badge · Discord Role · Whitelist Spot" maxlength="200" />
+            <span class="form-hint" style="margin-top:4px;display:block">Leave blank if there's no reward for this quiz.</span>
+          </div>
+
+          <div class="datetime-row">
+            <div class="form-group">
+              <label for="qfStartTime">Start Date &amp; Time <span class="req">*</span></label>
+              <input type="datetime-local" id="qfStartTime" />
+            </div>
+            <div class="form-group">
+              <label for="qfEndTime">End Date &amp; Time <span class="form-hint">(optional)</span></label>
+              <input type="datetime-local" id="qfEndTime" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" id="qfDraft" />
+              <span>Keep as draft</span>
+              <small>(hide from public — quiz won't be visible on quiz page)</small>
+            </label>
+          </div>
+
+          <span class="form-error" id="quizFormError"></span>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Quiz</button>
+            <button type="button" class="btn btn-ghost" id="cancelQuizForm2">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: QUESTIONS LIST
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelQuestions">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="questionsQuizTitle">Questions</h2>
+            <p class="panel-subtitle" id="questionsQuizCount">0 questions</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-ghost btn-sm" id="backToQuizzes">← Quizzes</button>
+            <button class="btn btn-primary btn-sm" id="addQuestionBtn">+ Add Question</button>
+          </div>
+        </div>
+        <div id="questionsListContainer" class="questions-list"></div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: QUESTION FORM (create / edit)
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelQuestionForm">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="questionFormTitle">Add Question</h2>
+            <p class="panel-subtitle">Define the question, options and correct answer.</p>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="cancelQuestionForm">← Back</button>
+        </div>
+
+        <form class="admin-form" id="questionForm">
+          <input type="hidden" id="qqId" />
+          <input type="hidden" id="qqQuizId" />
+
+          <div class="form-row-2">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="qqText">Question Text <span class="req">*</span></label>
+              <textarea id="qqText" rows="3" placeholder="e.g. What does AMM stand for in DeFi?" required maxlength="400"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="qqCategory">Category <span class="form-hint">(optional)</span></label>
+            <input type="text" id="qqCategory" placeholder="e.g. DeFi, Blockchain, Security" maxlength="40" />
+          </div>
+
+          <div class="options-editor">
+            <div class="oe-header">
+              <span>Answer Options</span>
+              <span class="form-hint">Select the correct answer using the radio button</span>
+            </div>
+
+            <div class="option-row">
+              <label class="option-letter correct-radio">
+                <input type="radio" name="qqAnswer" value="0" checked />
+                <span class="ol-badge">A</span>
+              </label>
+              <input type="text" id="qqOptionA" class="option-input" placeholder="Option A" required maxlength="200" />
+            </div>
+
+            <div class="option-row">
+              <label class="option-letter correct-radio">
+                <input type="radio" name="qqAnswer" value="1" />
+                <span class="ol-badge">B</span>
+              </label>
+              <input type="text" id="qqOptionB" class="option-input" placeholder="Option B" required maxlength="200" />
+            </div>
+
+            <div class="option-row">
+              <label class="option-letter correct-radio">
+                <input type="radio" name="qqAnswer" value="2" />
+                <span class="ol-badge">C</span>
+              </label>
+              <input type="text" id="qqOptionC" class="option-input" placeholder="Option C" required maxlength="200" />
+            </div>
+
+            <div class="option-row">
+              <label class="option-letter correct-radio">
+                <input type="radio" name="qqAnswer" value="3" />
+                <span class="ol-badge">D</span>
+              </label>
+              <input type="text" id="qqOptionD" class="option-input" placeholder="Option D" required maxlength="200" />
+            </div>
+
+            <p class="oe-hint">💡 The option with the filled radio button is marked as correct.</p>
+          </div>
+
+          <span class="form-error" id="questionFormError"></span>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Question</button>
+            <button type="button" class="btn btn-ghost" id="cancelQuestionForm2">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: PARTICIPANTS
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelParticipants">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="participantsQuizTitle">Participants</h2>
+            <p class="panel-subtitle" id="participantsQuizMeta">Loading…</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-ghost btn-sm" id="backToQuizzesFromParts">← Quizzes</button>
+          </div>
+        </div>
+        <div id="participantsContainer"></div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           PANEL: SCHEDULE
+      ══════════════════════════════════════ -->
+      <section class="admin-panel hidden" id="panelSchedule">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">Quiz Schedule</h2>
+            <p class="panel-subtitle">All quizzes sorted by their start time.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="initQuizForm()">+ New Quiz</button>
+        </div>
+        <div id="scheduleContainer"></div>
+      </section>
+
+    </div><!-- /admin-main -->
+  </div><!-- /admin-layout -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="db.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

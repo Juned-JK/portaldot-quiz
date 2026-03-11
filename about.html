@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Portaldot Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+        <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="quiz.html" class="mobile-link">Quiz</a>
+      <a href="leaderboard.html" class="mobile-link">Leaderboard</a>
+      <a href="about.html" class="mobile-link active">About</a>
+    </div>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="about-page">
+
+    <!-- Ambient orbs -->
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    <!-- ── HERO ── -->
+    <section class="ab-hero">
+      <div class="ab-hero-inner">
+        <div class="section-label">About Us</div>
+        <h1 class="ab-title">Learn Everything About<br /><span class="gradient-text">The Portaldot Project</span></h1>
+        <p class="ab-subtitle">
+          Portaldot Quiz is a free, community-built quiz platform where anyone can test their Portaldot knowledge — no sign-up, no wallet, no barrier.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── WHAT IS IT ── -->
+    <section class="ab-section">
+      <div class="ab-inner">
+        <div class="ab-two-col">
+          <div class="ab-text-block">
+            <div class="section-label">What is Portaldot Quiz?</div>
+            <h2 class="ab-heading">A quiz platform made<br />for Portaldot learners</h2>
+            <p class="ab-body">
+              Portaldot Quiz is a community-built platform where anyone can join scheduled quizzes and test how well they know the Portaldot project. No wallet needed, no account required — just pick a username and compete.
+            </p>
+            <p class="ab-body">
+              Every quiz focuses on the Portaldot ecosystem: how it works, its technology, its vision, and its community. It's the best way to learn while having fun.
+            </p>
+          </div>
+          <div class="ab-visual-block">
+            <div class="ab-stat-card">
+              <div class="ab-stat-row">
+                <div class="ab-stat">
+                  <span class="ab-stat-num">Free</span>
+                  <span class="ab-stat-lbl">Always</span>
+                </div>
+                <div class="ab-stat-divider"></div>
+                <div class="ab-stat">
+                  <span class="ab-stat-num">No</span>
+                  <span class="ab-stat-lbl">Sign-up needed</span>
+                </div>
+              </div>
+              <div class="ab-stat-row" style="margin-top:20px">
+                <div class="ab-stat">
+                  <span class="ab-stat-num">30s</span>
+                  <span class="ab-stat-lbl">Per question</span>
+                </div>
+                <div class="ab-stat-divider"></div>
+                <div class="ab-stat">
+                  <span class="ab-stat-num">Live</span>
+                  <span class="ab-stat-lbl">Leaderboard</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="ab-section ab-section-alt">
+      <div class="ab-inner">
+        <div class="section-label" style="text-align:center">How It Works</div>
+        <h2 class="ab-heading" style="text-align:center;margin-bottom:48px">Simple. Fast. Fair.</h2>
+        <div class="ab-steps">
+          <div class="ab-step">
+            <div class="ab-step-num">01</div>
+            <h3>A quiz gets scheduled</h3>
+            <p>Quizzes are scheduled with a set start and end time. They go live automatically — no manual trigger needed.</p>
+          </div>
+          <div class="ab-step-arrow">→</div>
+          <div class="ab-step">
+            <div class="ab-step-num">02</div>
+            <h3>You join with a username</h3>
+            <p>When a quiz is live, visit the quiz page, enter any username you like, and you're in. No account or wallet required.</p>
+          </div>
+          <div class="ab-step-arrow">→</div>
+          <div class="ab-step">
+            <div class="ab-step-num">03</div>
+            <h3>Answer &amp; compete</h3>
+            <p>30 seconds per question. Answer correctly and quickly to climb the leaderboard. Scores and rankings are saved permanently.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MISSION ── -->
+    <section class="ab-section">
+      <div class="ab-inner">
+        <div class="ab-mission-card">
+          <div class="ab-mission-icon">🎯</div>
+          <div class="section-label">Our Mission</div>
+          <h2 class="ab-heading">Make learning about Portaldot<br />fun and accessible</h2>
+          <p class="ab-body ab-body-center">
+            The Portaldot project is constantly evolving. Portaldot Quiz is a community effort to help people learn, stay up to date, and connect with others who share the same interest — all through the simple format of a quiz.
+          </p>
+          <a href="quiz.html" class="btn btn-primary btn-glow" style="margin-top:28px">Start a Quiz →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT WE COVER ── -->
+    <section class="ab-section ab-section-alt">
+      <div class="ab-inner">
+        <div class="section-label" style="text-align:center">Topics We Cover</div>
+        <h2 class="ab-heading" style="text-align:center;margin-bottom:40px">All things Portaldot</h2>
+        <div class="ab-topics">
+          <div class="ab-topic">
+            <span class="ab-topic-icon">🌐</span>
+            <span>Portaldot Ecosystem</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">⚙️</span>
+            <span>Platform Features</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">👥</span>
+            <span>Community &amp; Culture</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">🎯</span>
+            <span>Project Vision</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">🗺️</span>
+            <span>Roadmap &amp; Milestones</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">📖</span>
+            <span>Project History</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">🏛️</span>
+            <span>Governance &amp; Voting</span>
+          </div>
+          <div class="ab-topic">
+            <span class="ab-topic-icon">🤝</span>
+            <span>Partners &amp; Integrations</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PLATFORM ── -->
+    <section class="ab-section">
+      <div class="ab-inner">
+        <div class="ab-two-col ab-two-col-flip">
+          <div class="ab-text-block">
+            <div class="section-label">The Platform</div>
+            <h2 class="ab-heading">Built by the<br />community, for the community</h2>
+            <p class="ab-body">
+              Portaldot Quiz is an independent, community-built project. It was created by community members who wanted a fun and engaging way to learn more about the Portaldot project and share that knowledge with others.
+            </p>
+            <p class="ab-body">
+              All quiz results are stored permanently so anyone can browse past leaderboards, check scores, and track community performance over time.
+            </p>
+            <div class="ab-links">
+              <a href="https://x.com/PortaldotL0" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">𝕏</span>
+                <span>@PortaldotL0</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+              <a href="https://mee6.xyz/i/J4zcxdKRC8" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">💬</span>
+                <span>Discord</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+              <a href="https://t.me/portaldot1" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">✈</span>
+                <span>Telegram</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+              <a href="https://portaldot-network.gitbook.io/portaldot-network-docs" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">📄</span>
+                <span>Whitepaper</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+              <a href="https://github.com/portaldotVolunteer" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">⌥</span>
+                <span>GitHub</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+              <a href="https://linktr.ee/Portaldot" target="_blank" rel="noopener" class="ab-link">
+                <span class="ab-link-icon">🌿</span>
+                <span>Linktree</span>
+                <span class="ab-link-arr">↗</span>
+              </a>
+            </div>
+          </div>
+          <div class="ab-visual-block">
+            <div class="ab-logo-card">
+              <img src="logo.png" alt="Portaldot Quiz" class="ab-logo-big" />
+              <div class="ab-logo-name">Portaldot<span class="logo-accent">Quiz</span></div>
+              <p class="ab-logo-sub">Community Quiz Platform</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="ab-cta-section">
+      <div class="ab-inner">
+        <div class="ab-cta-card">
+          <h2 class="ab-cta-title">Ready to test your knowledge?</h2>
+          <p class="ab-cta-sub">Join the next quiz and see how much you know about Portaldot.</p>
+          <div class="ab-cta-actions">
+            <a href="quiz.html" class="btn btn-primary btn-glow">Take a Quiz →</a>
+            <a href="leaderboard.html" class="btn btn-ghost">View Leaderboards</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /about-page -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:12px">
+          <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+          <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+        </a>
+        <p>A community quiz platform for learning about Portaldot.</p>
+        <div class="footer-socials">
+          <a href="https://x.com/PortaldotL0" target="_blank" rel="noopener" class="social-link" title="Follow on X">𝕏</a>
+          <a href="https://mee6.xyz/i/J4zcxdKRC8" target="_blank" rel="noopener" class="social-link" title="Discord">💬</a>
+          <a href="https://t.me/portaldot1" target="_blank" rel="noopener" class="social-link" title="Telegram">✈</a>
+          <a href="https://github.com/portaldotVolunteer" target="_blank" rel="noopener" class="social-link" title="GitHub">⌥</a>
+          <a href="https://linktr.ee/Portaldot" target="_blank" rel="noopener" class="social-link" title="Linktree">🌿</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="fl-group">
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+          <a href="quiz.html">Quiz</a>
+          <a href="leaderboard.html">Leaderboard</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="fl-group">
+          <h4>Community</h4>
+          <a href="https://x.com/PortaldotL0" target="_blank" rel="noopener">X / Twitter ↗</a>
+          <a href="https://mee6.xyz/i/J4zcxdKRC8" target="_blank" rel="noopener">Discord ↗</a>
+          <a href="https://t.me/portaldot1" target="_blank" rel="noopener">Telegram ↗</a>
+        </div>
+        <div class="fl-group">
+          <h4>Resources</h4>
+          <a href="https://portaldot-network.gitbook.io/portaldot-network-docs" target="_blank" rel="noopener">Whitepaper ↗</a>
+          <a href="https://github.com/portaldotVolunteer" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://linktr.ee/Portaldot" target="_blank" rel="noopener">Linktree ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Portaldot Quiz. Built by the community.</span>
+      <a href="admin-login.html" class="footer-admin-link">Admin ↗</a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

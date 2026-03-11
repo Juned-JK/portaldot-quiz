@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — Portaldot Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Portaldot Quiz" class="logo-img" />
+        <span class="logo-name">Portaldot<span class="logo-accent">Quiz</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="leaderboard.html" class="nav-link active">Leaderboard</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="quiz.html" class="mobile-link">Quiz</a>
+      <a href="leaderboard.html" class="mobile-link active">Leaderboard</a>
+      <a href="about.html" class="mobile-link">About</a>
+    </div>
+  </nav>
+
+  <div class="lb-page">
+    <div class="lb-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Specific quiz leaderboard (shown if ?id= param) -->
+    <section class="lb-section" id="lbSpecific" style="display:none">
+      <div class="lb-inner">
+        <a href="quiz.html" class="lb-back">← All Quizzes</a>
+        <div class="lb-quiz-header">
+          <span class="section-label">Final Results</span>
+          <h1 class="lb-title gradient-text" id="lbQuizTitle"></h1>
+          <p class="lb-subtitle" id="lbQuizMeta"></p>
+        </div>
+        <div class="lb-loading" id="lbLoading">
+          <div class="loading-spinner"></div><span>Loading leaderboard…</span>
+        </div>
+        <div id="lbTableWrap" class="lb-table-wrap hidden">
+          <table class="lb-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Score</th>
+                <th>Time Taken</th>
+              </tr>
+            </thead>
+            <tbody id="lbTableBody"></tbody>
+          </table>
+        </div>
+        <div id="lbEmpty" class="empty-lb hidden">No participants yet.</div>
+      </div>
+    </section>
+
+    <!-- Past quizzes list -->
+    <section class="lb-section lb-past-section">
+      <div class="lb-inner">
+        <div class="section-label">Archive</div>
+        <h2 class="section-title">Past <span class="gradient-text">Quiz Results</span></h2>
+        <p class="section-desc" style="margin-bottom:32px">Browse results from all completed quizzes.</p>
+        <div id="pastQuizzesGrid" class="past-quizzes-grid"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="db.js"></script>
+  <script src="leaderboard.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
